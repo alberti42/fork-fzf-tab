@@ -72,6 +72,7 @@ if (( ! use_tmux_popup )); then
 fi
 
 command cat > $tmp_dir/completions.$$
+print -rn -- $_ftb_all_group_color > $tmp_dir/all-group-color.$$
 
 local dd='gdd'
 if (( ${+commands[$dd]} == 0 )) ; then

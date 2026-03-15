@@ -496,6 +496,7 @@ typeset -ga _ftb_group_colors=(
   $'\x1b[38;5;100m' $'\x1b[38;5;98m' $'\x1b[91m' $'\x1b[38;5;80m' $'\x1b[92m'
   $'\x1b[38;5;214m' $'\x1b[38;5;165m' $'\x1b[38;5;124m' $'\x1b[38;5;120m'
 )
+typeset -g _ftb_all_group_color=$'\x1b[1;39m'  # bold, default foreground
 
 # init
 () {

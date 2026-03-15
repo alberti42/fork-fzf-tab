@@ -13,13 +13,29 @@ if (( $#_ftb_groups == 1 )) && { ! -ftb-zstyle -m single-group "header" }; then
   return
 fi
 
+local all_label='[All]'
+
 # calculate the max column width
 for i in $_ftb_groups; do
   (( $#i > mlen )) && mlen=$#i
 done
+(( $#all_label > mlen )) && mlen=$#all_label
 mlen+=1
 
 -ftb-zstyle -a group-colors group_colors || group_colors=($_ftb_group_colors)
+
+# Prepend [All] group
+if (( len + $#all_label > COLUMNS - 5 )); then
+  _ftb_headers+=$tmp
+  tmp='' && len=0
+fi
+if (( len + mlen > COLUMNS - 5 )); then
+  _ftb_headers+=$tmp${_ftb_all_group_color}${all_label}$'\033[00m'
+  tmp='' && len=0
+else
+  tmp+=${_ftb_all_group_color}${(r:$mlen:)all_label}$'\033[00m'
+  len+=$mlen
+fi
 
 for (( i=1; i<=$#_ftb_groups; i++ )); do
   [[ $_ftb_groups[i] == "__hide__"* ]] && continue
